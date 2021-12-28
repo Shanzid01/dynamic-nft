@@ -23,7 +23,7 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
 
   await smartContract.deployed();
 
-  await new Promise(resolve => setTimeout(resolve, 7000));
+  await new Promise(resolve => setTimeout(resolve, 10000));
   await hre.run("verify:verify", {
     address: smartContract.address,
     constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL, MAX_SUPPLY, MINT_COMMISSION],
@@ -41,10 +41,14 @@ export default {
     }
   },
   networks: {
-    mumbai: {
+    mumbai_dev: {
       url: "https://rpc-mumbai.maticvigil.com",
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: [process.env.PRIVATE_KEY_DEV],
       gasPrice: 8000000000
+    },
+    matic_prod: {
+      url: process.env.ALCHEMY_URL,
+      accounts: [process.env.PRIVATE_KEY_PROD],
     }
   },
   etherscan: {
