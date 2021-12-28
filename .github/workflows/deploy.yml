@@ -3,6 +3,12 @@ name: Deploy to Polygon mainnet
 on:
   workflow_dispatch:
 
+env:
+  POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
+  PRIVATE_KEY_DEV: ${{secrets.PRIVATE_KEY_DEV}}
+  PRIVATE_KEY_PROD: ${{secrets.PRIVATE_KEY_PROD}}
+  ALCHEMY_URL: ${{secrets.ALCHEMY_URL}}
+
 jobs:
   deploy_to_polygon:
     if: contains('["shanzid01"]', github.actor)
