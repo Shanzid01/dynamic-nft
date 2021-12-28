@@ -2,6 +2,19 @@ name: Deploy to Polygon mainnet
 
 on:
   workflow_dispatch:
+    inputs:
+      TOKEN_NAME:
+        description: NFT contract name (default "Dynamic NFT")
+        required: false
+      TOKEN_SYMBOL:
+        description: NFT contract symbol (default "DNFT")
+        required: false
+      MAX_SUPPLY:
+        description: Maximum supply allowed (default -1, i.e. unlimited)
+        required: false
+      MINT_COMMISSION:
+        description: Fee received for minting (default 1)
+        required: false
 
 env:
   POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
