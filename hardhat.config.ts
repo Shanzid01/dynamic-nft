@@ -27,10 +27,13 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
   await smartContract.deployed();
 
   await new Promise(resolve => setTimeout(resolve, 10000));
+
+  /* verify may falsely fail if the contract has already been verified
+  /* failure should be ignored */
   await hre.run("verify:verify", {
     address: smartContract.address,
     constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL, MAX_SUPPLY, MINT_COMMISSION],
-  })
+  }).catch(e => console.log(e.message))
 });
 
 export default {
