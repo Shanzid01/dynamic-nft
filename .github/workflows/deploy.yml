@@ -8,6 +8,11 @@ jobs:
     if: contains('["shanzid01"]', github.actor)
     runs-on: ubuntu-latest
     steps:
+      env:
+        TOKEN_NAME: ${{ github.event.inputs.TOKEN_NAME }}
+        TOKEN_SYMBOL: ${{ github.event.inputs.TOKEN_SYMBOL }}
+        MAX_SUPPLY: ${{ github.event.inputs.MAX_SUPPLY }}
+        MINT_COMMISSION: ${{ github.event.inputs.MINT_COMMISSION }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
