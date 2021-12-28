@@ -21,10 +21,12 @@ env:
   PRIVATE_KEY_DEV: ${{secrets.PRIVATE_KEY_DEV}}
   PRIVATE_KEY_PROD: ${{secrets.PRIVATE_KEY_PROD}}
   ALCHEMY_URL: ${{secrets.ALCHEMY_URL}}
+  repo_owner: ${{github.repository_owner}}
 
 jobs:
   deploy_to_polygon:
-    if: contains('["shanzid01"]', github.actor)
+    # if: contains('[ $repo_owner , "username1", "username2"...]', github.actor)
+    if: contains('[ $repo_owner ]', github.actor)
     runs-on: ubuntu-latest
     env:
       TOKEN_NAME: ${{ github.event.inputs.TOKEN_NAME }}
