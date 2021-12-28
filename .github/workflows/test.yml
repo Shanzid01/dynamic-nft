@@ -4,6 +4,12 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
+  PRIVATE_KEY_DEV: ${{secrets.PRIVATE_KEY_DEV}}
+  PRIVATE_KEY_PROD: ${{secrets.PRIVATE_KEY_PROD}}
+  ALCHEMY_URL: ${{secrets.ALCHEMY_URL}}
+  
 
 jobs:
   test_pull_request:
