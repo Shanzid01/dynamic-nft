@@ -9,7 +9,7 @@ import "./@rarible/royalties/contracts/impl/RoyaltiesV2Impl.sol";
 
 contract NFT is ERC721, Ownable, RoyaltiesV2Impl {
     uint256 public currentSupply;
-    int256 public maxSupply;
+    uint256 public maxSupply;
     uint256 public mintCommission;
     mapping(uint256 => string) private _tokenURIs;
     mapping(uint256 => address) private _artists;
@@ -25,7 +25,7 @@ contract NFT is ERC721, Ownable, RoyaltiesV2Impl {
         require(_maxsupply >= -1, "Invalid max supply");
 
         currentSupply = 0;
-        maxSupply = _maxsupply;
+        maxSupply = uint256(_maxsupply);
         mintCommission = _mintCommission;
     }
 
@@ -37,10 +37,7 @@ contract NFT is ERC721, Ownable, RoyaltiesV2Impl {
             msg.value >= mintCommission || msg.sender == owner(),
             "Not enough commission"
         );
-        require(
-            maxSupply == -1 || currentSupply < uint256(maxSupply),
-            "Max supply reached"
-        );
+        require(currentSupply < maxSupply, "Max supply reached");
         require(
             royaltyPercent <= 100 && royaltyPercent >= 0,
             "Royalties must be between 0 and 100"

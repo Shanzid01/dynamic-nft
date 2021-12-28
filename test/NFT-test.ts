@@ -48,6 +48,18 @@ describe("NFT.sol", function () {
         expect(pass).to.equal(true);
     });
 
+    it("maxSupply of -1 should allow unlimited mints", async () => {
+        const myNFT = await ethers.getContractFactory("NFT");
+        smartContract = await myNFT.deploy("Test NFT", "TNFT", -1, 0);
+
+        await smartContract.connect(owner).mint(tokenURI_1, 1);
+        await smartContract.connect(user1).mint(tokenURI_2, 1);
+
+        for (let i = 0; i < 100; i++) {
+            await smartContract.connect(owner).mint(tokenURI_1, 0);
+        }
+    });
+
     it("mint should be accessible to everyone", async () => {
         await smartContract.connect(user1).mint(tokenURI_1, 0);
         await smartContract.connect(owner).mint(tokenURI_1, 10);
