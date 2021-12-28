@@ -13,10 +13,13 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
 });
 
 task("deploy", "Deploy the smart contracts", async (args, hre) => {
-  const MAX_SUPPLY = -1;
-  const TOKEN_NAME = "Dynamic NFT";
-  const TOKEN_SYMBOL = "DNFT";
-  const MINT_COMMISSION = 1;
+  const TOKEN_NAME = process.env.TOKEN_NAME ?? "Dynamic NFT";
+  const TOKEN_SYMBOL = process.env.TOKEN_SYMBOL ?? "DNFT";
+  const MAX_SUPPLY = process.env.MAX_SUPPLY ? Number(process.env.MAX_SUPPLY) : -1;
+  const MINT_COMMISSION = process.env.MINT_COMMISSION ? Number(process.env.MINT_COMMISSION) : 1;
+
+  console.log(`Deploying ${TOKEN_NAME} with symbol ${TOKEN_SYMBOL},`,
+    `max supply ${MAX_SUPPLY}, and mint commission ${MINT_COMMISSION}`);
 
   const NFT = await hre.ethers.getContractFactory("NFT");
   const smartContract = await NFT.deploy(TOKEN_NAME, TOKEN_SYMBOL, MAX_SUPPLY, MINT_COMMISSION);
