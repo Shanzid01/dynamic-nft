@@ -1,0 +1,18 @@
+name: Deploy to Polygon mainnet
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_to_polygon:
+    if: contains('["shanzid01"]', github.actor)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm ci
+      - run: npx hardhat compile
+      - run: npx hardhat deploy --network matic_prod
+  
