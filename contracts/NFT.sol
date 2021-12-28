@@ -35,7 +35,7 @@ contract NFT is ERC721, Ownable, RoyaltiesV2Impl {
     {
         require(
             msg.value >= mintCommission || msg.sender == owner(),
-            "Not enought ETH"
+            "Not enough commission"
         );
         require(
             maxSupply == -1 || currentSupply < uint256(maxSupply),
