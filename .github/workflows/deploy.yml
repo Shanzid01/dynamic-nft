@@ -35,7 +35,7 @@ env:
   ALCHEMY_URL: ${{secrets.ALCHEMY_URL}}
 
 jobs:
-  deploy_to_polygon:
+  deploy:
     # if: contains('[ $repo_owner , "username1", "username2"...]', github.actor)
     if: contains('[ ${{github.repository_owner}} ]', github.actor)
     runs-on: ubuntu-latest
