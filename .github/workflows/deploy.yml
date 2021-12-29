@@ -24,9 +24,9 @@ on:
         required: false
         default: -1
       MINT_COMMISSION:
-        description: Fee received for minting
+        description: Fee charged for minting
         required: false
-        default: 1
+        default: 0
 
 env:
   POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
