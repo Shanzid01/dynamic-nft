@@ -20,11 +20,11 @@ on:
         required: true
         default: TNFT
       MAX_SUPPLY:
-        description: Maximum supply (default -1, i.e. unlimited)
+        description: Maximum supply (-1 for unlimited)
         required: false
         default: -1
       MINT_COMMISSION:
-        description: Fee received for minting (default 1)
+        description: Fee received for minting
         required: false
         default: 1
 
