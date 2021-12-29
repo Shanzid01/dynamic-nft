@@ -1,20 +1,32 @@
-name: Deploy to Polygon mainnet
+name: Deploy smart contracts
 
 on:
   workflow_dispatch:
     inputs:
+      DEPLOY_NETWORK:
+        description: Network to deploy to
+        required: true
+        type: choice
+        options:
+        - mumbai_dev
+        - matic_prod
+        - eth_prod
       TOKEN_NAME:
-        description: NFT contract name (default "Dynamic NFT")
-        required: false
+        description: NFT contract name
+        required: true
+        default: Test NFT
       TOKEN_SYMBOL:
-        description: NFT contract symbol (default "DNFT")
-        required: false
+        description: NFT contract symbol
+        required: true
+        default: TNFT
       MAX_SUPPLY:
-        description: Maximum supply allowed (default -1, i.e. unlimited)
+        description: Maximum supply (default -1, i.e. unlimited)
         required: false
+        default: -1
       MINT_COMMISSION:
         description: Fee received for minting (default 1)
         required: false
+        default: 1
 
 env:
   POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
@@ -39,5 +51,5 @@ jobs:
           node-version: 14
       - run: npm ci
       - run: npx hardhat compile
-      - run: npx hardhat deploy --network matic_prod
+      - run: npx hardhat deploy --network ${{ github.event.inputs.DEPLOY_NETWORK }}
   
