@@ -55,6 +55,10 @@ export default {
     matic_prod: {
       url: process.env.ALCHEMY_URL,
       accounts: [process.env.PRIVATE_KEY_PROD],
+    },
+    eth_prod: {
+      url: process.env.ALCHEMY_URL,
+      accounts: [process.env.PRIVATE_KEY_PROD],
     }
   },
   etherscan: {
